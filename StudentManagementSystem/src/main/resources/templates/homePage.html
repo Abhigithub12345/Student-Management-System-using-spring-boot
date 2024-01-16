@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+	<div class="navbarTemplate">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a th:href="@{/api/students}"
+						class="nav-link" href="#" style="font-size:20px">Students Records </a>
+					</li>
+						
+					<li class="nav-item"><a th:href="@{/api/students/add}"
+						class="nav-link" href="#" style="font-size:20px">Add Student</a>
+					</li>
+				</ul>
+			</div>
+
+			
+		</nav>
+	</div>
+
+
+	<div class="container">
+		<h2 class="text-center text-danger my-3">Students Records</h2>
+		<div class="row">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead class="table-dark">
+						<tr>
+							<th>Id</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Gender</th>
+							<th>Education</th>
+							<th>Register Date</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="student : ${students}">
+							<td th:text="${student.id}"></td>
+							<td th:text="${student.firstName}"></td>
+							<td th:text="${student.lastName}"></td>
+							<td th:text="${student.gender}"></td>
+							<td th:text="${student.education}"></td>
+							<td th:text="${student.date}"></td>
+
+							<td>
+							<a th:href="@{/api/student/edit/{id}(id=${student.id})}">
+								<button class="btn btn-outline-success">
+									<i class="fa fa-pencil" aria-hidden="true"></i>
+								</button>
+								</a>
+
+							<a th:href="@{/api/student/delete/{id}(id=${student.id})}">
+								<button class="btn btn-outline-danger" style="margin-left: 20px;">
+									<i class="fa fa-trash" aria-hidden="true"></i>
+								</button>
+							</a>
+
+							<a th:href="@{/api/student/details/{id}(id=${student.id})}">
+								<button class="btn btn-outline-secondary" style="margin-left: 20px;">
+									<i class="fa fa-info-circle" aria-hidden="true"></i>
+								</button>
+							</a>
+							</td> 
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
